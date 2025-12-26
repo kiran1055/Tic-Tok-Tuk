@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rock Paper Scissor Game</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      background-color: aquamarine;
+      color: rgb(63, 78, 66);
+      text-align: center;
+      font-size: 4rem;
+      font-family: Garamond;
+    }
+
+    .likes {
+      display: flex;
+      padding-top: 4rem;
+      gap: 7rem;
+      justify-content: center;
+    }
+
+    .like {
+      justify-content: center;
+      text-align: center;
+      display: flex;
+    }
+
+    .like:hover {
+      opacity: 0.5;
+      cursor: pointer;
+    }
+
+    #rock, #paper, #scissor {
+      height: 180px;
+      width: 180px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #rock {
+      background-color: rgb(164, 211, 211);
+    }
+
+    #paper {
+      background-color: rgb(226, 155, 212);
+    }
+
+    #scissor {
+      background-color: rgb(139, 133, 199);
+    }
+
+    img {
+      height: 150px;
+      width: 150px;
+      object-fit: cover;
+    }
+
+    #user, #comp {
+      text-align: center;
+    }
+
+    .score-b {
+      display: flex;
+      justify-content: center;
+      gap: 8rem;
+      font-size: 2.7rem;
+      padding-top: 5rem;
+    }
+
+    .msg-c {
+      text-align: center;
+      padding-top: 3rem;
+      font-size: 2rem;
+    }
+
+    #msg {
+      background-color: coral;
+      display: inline;
+      padding: 0.5rem 1.5rem;
+      border-radius: 2rem;
+    }
+
+    .reset-btn {
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    button {
+      padding: 0.7rem 2rem;
+      font-size: 1.2rem;
+      border: none;
+      background-color: #333;
+      color: white;
+      border-radius: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>Rock Paper Scissor...</h1>
+  <div class="likes">
+    <div class="like" id="rock">
+      <img src="rock.png" alt="rock image" />
+    </div>
+    <div class="like" id="paper">
+      <img src="paper.png" alt="paper image" />
+    </div>
+    <div class="like" id="scissor">
+      <img src="scissor.png" alt="scissor" />
+    </div>
+  </div>
+
+  <div class="score-b">
+    <div class="score">
+      <p id="user">0</p>
+      <p>You</p>
+    </div>
+    <div class="score">
+      <p id="comp">0</p>
+      <p>Computer</p>
+    </div>
+  </div>
+
+  <div class="msg-c">
+    <p id="msg">Play The Game</p>
+  </div>
+
+  <div class="reset-btn">
+    <button onclick="resetGame()">Reset Game</button>
+  </div>
+
+  <script>
+    let userScore = 0;
+    let compScore = 0;
+
+    const likes = document.querySelectorAll(".like");
+    const msg = document.querySelector("#msg");
+    const userScorePara = document.querySelector("#user");
+    const compScorePara = document.querySelector("#comp");
+
+    const genCompLike = () => {
+      const options = ["rock", "paper", "scissor"];
+      const randIdx = Math.floor(Math.random() * 3);
+      return options[randIdx];
+    };
+
+    const drawGame = () => {
+      msg.innerText = "Game Was Draw. Play again.!!";
+      msg.style.backgroundColor = "coral";
+    };
+
+    const showWinner = (userWin, userLike, compLike) => {
+      if (userWin) {
+        userScore++;
+        userScorePara.innerText = userScore;
+        msg.innerText = `You Win! Your ${userLike} beats ${compLike}`;
+        msg.style.backgroundColor = "green";
+      } else {
+        compScore++;
+        compScorePara.innerText = compScore;
+        msg.innerText = `You lost. ${compLike} beats your ${userLike}`;
+        msg.style.backgroundColor = "red";
+      }
+    };
+
+    const playGame = (userLike) => {
+      const compLike = genCompLike();
+
+      if (userLike === compLike) {
+        drawGame();
+      } else {
+        let userWin = true;
+        if (userLike === "rock") {
+          userWin = compLike === "paper" ? false : true;
+        } else if (userLike === "paper") {
+          userWin = compLike === "scissor" ? false : true;
+        } else {
+          userWin = compLike === "rock" ? false : true;
+        }
+        showWinner(userWin, userLike, compLike);
+      }
+    };
+
+    likes.forEach((like) => {
+      like.addEventListener("click", () => {
+        const userLike = like.getAttribute("id");
+        playGame(userLike);
+      });
+    });
+
+    const resetGame = () => {
+      userScore = 0;
+      compScore = 0;
+      userScorePara.innerText = 0;
+      compScorePara.innerText = 0;
+      msg.innerText = "Play The Game";
+      msg.style.backgroundColor = "coral";
+    };
+  </script>
+</body>
+</html>

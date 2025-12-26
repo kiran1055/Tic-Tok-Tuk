@@ -1,0 +1,68 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+h1 {
+    background-color: aquamarine;
+    color:rgb(63, 78, 66);
+    text-align: center;
+    font-size: 4rem;
+    font-family: Garamond;
+}
+.likes {
+    display:flex;
+    padding-top: 4rem;
+    gap:7rem;
+    justify-content: center;
+    /* text-align: center; */
+}
+.like{
+    justify-content: center;
+    text-align: center;
+    display: flex;
+     /* border: 2px solid black; */
+}
+.like:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}
+#rock {
+    height: 180px;
+    width: 180px;
+    background-color: rgb(164, 211, 211);
+    border-radius: 50%;
+}
+#paper {
+    height: 180px;
+    width: 180px;
+    background-color: rgb(226, 155, 212);
+    border-radius: 50%;
+}
+#scissor {
+    height: 170px;
+    width: 170px;
+    background-color: rgb(139, 133, 199);
+    border-radius: 50%;
+}
+img{
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+}
+#user,#comp{
+    text-align: center;
+}
+.score-b{
+    display: flex;
+    justify-content: center;
+    gap: 8rem;
+    font-size: 2.7rem;
+    padding-top: 5rem;
+
+}
+.msg-c{
+    text-align: center;
+    padding-top: 5rem;
+    font-size: 2.7rem;
+}
